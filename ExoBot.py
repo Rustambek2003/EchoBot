@@ -1,7 +1,8 @@
 #Import library for telegram bot
 import requests
+from pprint import pprint
 
-TOKEN = '5455890832:AAHBgLe8naPTER2j_TmfCA1XhakJG5Owv-Y'
+TOKEN = '5455890832:AAGh9-yUlkri7iXD5V4AOlWDdRN-pAiOBLY'
 
 #Send message 
 def send_message(text:str, chat_id:int):
@@ -31,12 +32,10 @@ def get_last_update(updates):
 
 # Last update id
 # Send message through loop
-s = ''
+s = 0
 while True:
-    resulet = get_updates()
-    last_updet = get_last_update(resulet[-1])
-    text,chat_id,update_id = last_updet
-
-    if s != update_id:
+    result = get_updates() 
+    text,chat_id,update_id = get_last_update(result[-1])
+    if s < update_id:
         send_message(text, chat_id)
         s = update_id
